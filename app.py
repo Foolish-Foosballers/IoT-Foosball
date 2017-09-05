@@ -4,6 +4,10 @@ import json
 app = Flask(__name__)
 
 @app.route('/')
+def intro():
+    return render_template('index.html')
+
+@app.route('/game')
 def quickGame():
     return render_template('game.html')
 

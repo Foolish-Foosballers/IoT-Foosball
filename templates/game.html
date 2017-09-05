@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--<link rel="shortcut icon" type="image/png" href="favicon.png">-->
 
-  <!-- JQuery-->
+  <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
   <!-- Bootstrap -->
@@ -19,33 +19,37 @@
 
 </head>
 <style>
-  body {
-    background-color: #1479B6;
-  }
-
-  .container-fluid {
-    text-align: center;
-    color: white;
-    min-height: 100% !important;
-    height: 100% !important;
-  }
-
-  .container--center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  #icon--yellow {
+    color: yellow;
   }
 </style>
 
 <body>
 
-<div class="container-fluid">
-  <h1>Welcome!</h1>
-  <p>Please follow the on screen instructions to start a new game.</p>
-  <div class="container--center">
-    <a type="button" class="btn btn-default" href="./game">Start Game</a>
-  </div>
+<div class="container">
+  <h1>Game</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i> <span id="yellow--name">Player One</span> - <a href="./">Edit score</a></th>
+        <th><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black--name">Player Two</span> - <a href="./">Edit score</a></th>
+      </tr> 
+    </thead>
+    <tr>
+      <td><h2><span id="yellow--score">0</span></h2></td>
+      <td><h2><span id="black--score">0</span></h2></td>
+    </tr>
+  </table>
+
+  <h4>Options</h4>
+  <a type="button" class="btn btn-primary" href="/game">Restart</a>
+  <a type="button" class="btn btn-danger" href="/">End game</a>
+
 </div>
+
+<!-- Custom JS -->
+<script src="/static/js/game.js"></script>
+
 
 </body>
 </html>
