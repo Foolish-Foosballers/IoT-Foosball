@@ -5,12 +5,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def quickGame():
-    return render_template('index.html')
+    return render_template('game.html')
 
-@app.route('/<score>')
-def updateScore(score):
+@app.route('/score')
+def updateScore():
+    score = request.args.get('score')
+    print score
     score = int(score) + 1
-    return render_template('index.html', score=score)
+    print score
+    return render_template('game.html', score=score)
 
 @app.route('/endgame')
 def endGame():

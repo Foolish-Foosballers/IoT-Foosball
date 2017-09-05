@@ -25,9 +25,24 @@
         <button type="button" class="btn btn-lg btn-primary">Primary</button>
   </body>
     <div>
+        <button id="yellowScore" type="button" class="btn btn-lg btn-primary">Yellow Score</button>
+        <button id="blackScore" type="button" class="btn btn-lg btn-primary">Black Score</button>
+
         <script>
-            sendGameData();
+            $('#yellowScore').on('click', function(){
+                $.get(
+                    url="score",
+                    data={"score":'3'}, 
+                    success=function(data) {
+                        console.log({{score}});
+                    }
+                );
+            })
         </script>
+
+        <!-- <script>
+            sendGameData();
+        </script> -->
     </div>  
 </html>
 
