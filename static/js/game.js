@@ -10,6 +10,16 @@ var black = {
   score: 0
 };
 
+function updateScore(yellowScored, blackScored){
+  if (yellowScored) {
+    yellow.score++
+  }
+  else if (blackScored) {
+    black.score++
+  }
+  setDefaultPlayerScore();
+}
+
 function setDefaultPlayerName() {
   var elYellowName = document.getElementById("yellow--name");
   var elBlackName = document.getElementById("black--name");
