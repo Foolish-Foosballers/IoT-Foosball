@@ -17,43 +17,35 @@
   <!-- Font awesome -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+  <link rel="stylesheet" type="text/css" href="../static/css/game.css">
 
 </head>
-<style>
-  #icon--yellow {
-    color: yellow;
-  }
-</style>
-
 <body>
+  <div class="container">
+    <h1>Game</h1>
 
-<div class="container">
-  <h1>Game</h1>
-  <table class="table">
-    <thead>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i> <span id="yellow--name">Player One</span> - <a href="./">Edit score</a></th>
+          <th><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black--name">Player Two</span> - <a href="./">Edit score</a></th>
+        </tr> 
+      </thead>
       <tr>
-        <th><i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i> <span id="yellow--name">Player One</span> - <a href="./">Edit score</a></th>
-        <th><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black--name">Player Two</span> - <a href="./">Edit score</a></th>
-      </tr> 
-    </thead>
-    <tr>
-      <td><h2><span id="yellow--score">0</span></h2></td>
-      <td><h2><span id="black--score">0</span></h2></td>
-    </tr>
-  </table>
+        <td><h2><span id="yellow--score">0</span></h2></td>
+        <td><h2><span id="black--score">0</span></h2></td>
+      </tr>
+    </table>
 
-  <h4>Options</h4>
-  <a type="button" class="btn btn-primary" href="/game">Restart</a>
-  <a type="button" class="btn btn-danger" href="/">End game</a>
+    <h4>Options</h4>
+    <a type="button" class="btn btn-primary" href="/game">Restart</a>
+    <a type="button" class="btn btn-danger" href="/">End game</a>
+  </div>
 
-</div>
-
-<!-- Custom JS -->
-<script src="/static/js/game.js"></script>
-<script>
-  updateScore({{yellowScored}}, {{blackScored}});
-</script>
-
-
+  <!-- Custom JS -->
+  <script src="/static/js/game.js"></script>
+  <script>
+    updateScore({{yellowScored}}, {{blackScored}});
+  </script>
 </body>
 </html>

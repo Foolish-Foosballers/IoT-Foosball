@@ -1,0 +1,16 @@
+body {
+    background-color: #1479B6;
+}
+
+.container-fluid {
+    text-align: center;
+    color: white;
+    min-height: 100% !important;
+    height: 100% !important;
+}
+
+.container--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

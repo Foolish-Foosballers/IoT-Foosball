@@ -31,6 +31,7 @@ def endGame():
         json.dump(data, f)
 
     return render_template('index.html')
+
 @app.route('/blackScore')
 def updateBlackScore():
     return render_template('game.html', yellowScored = 0, blackScored = 1)
