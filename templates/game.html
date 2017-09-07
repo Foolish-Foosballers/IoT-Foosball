@@ -27,8 +27,8 @@
     <table class="table">
       <thead>
         <tr>
-          <th><i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i> <span id="yellow--name">Player One</span> - <a href="./">Edit score</a></th>
-          <th><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black--name">Player Two</span> - <a href="./">Edit score</a></th>
+          <th><i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i> <span id="yellow--name">{{ result['yellow--name'] }}</span> - <a href="./">Edit score</a></th>
+          <th><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black--name">{{ result['black--name'] }}</span> - <a href="./">Edit score</a></th>
         </tr> 
       </thead>
       <tr>
@@ -45,6 +45,8 @@
   <!-- Custom JS -->
   <script src="/static/js/game.js"></script>
   <script>
+    setDefaultPlayerName();
+    setDefaultPlayerScore();
     updateScore({{yellowScored}}, {{blackScored}});
   </script>
 </body>

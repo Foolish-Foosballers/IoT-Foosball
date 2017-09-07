@@ -7,17 +7,10 @@ app = Flask(__name__)
 def intro():
     return render_template('index.html')
 
-@app.route('/game')
+@app.route('/game', methods=['POST'])
 def quickGame():
-    return render_template('game.html', yellowScored = False, blackScored = False)
-
-# @app.route('/score')
-# def updateScore():
-#     score = request.args.get('score')
-#     print score
-#     score = int(score) + 1
-#     print score
-#     return render_template('game.html', yellowScored = False, blackScored = False)
+    result = request.form
+    return render_template('game.html', result=result, yellowScored=0, blackScored=0)
 
 @app.route('/endgame')
 def endGame():
@@ -34,11 +27,11 @@ def endGame():
 
 @app.route('/blackScore')
 def updateBlackScore():
-    return render_template('game.html', yellowScored = 0, blackScored = 1)
+    return render_template('game.html', yellowScored=0, blackScored=1)
 
 @app.route('/yellowScore')
 def updateYellowScore():
-    return render_template('game.html', yellowScored = 1, blackScored = 0)
+    return render_template('game.html', yellowScored=1, blackScored=0)
 
 if __name__ == '__main__':
     app.run()
