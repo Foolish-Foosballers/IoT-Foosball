@@ -1,3 +1,20 @@
+#container--scoreboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#container--player-scoreboard {
+    flex: 1;
+}
+
+#container--player-details {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 #icon--yellow {
     color: yellow;
 }
