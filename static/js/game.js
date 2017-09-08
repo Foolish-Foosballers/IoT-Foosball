@@ -11,6 +11,36 @@ var black = {
 };
 
 /**
+ * Starts game timer and updates every second
+ */
+function startTime() {
+  var minutes = parseInt(document.getElementById("minutes").innerHTML);
+  var seconds = parseInt(document.getElementById("seconds").innerHTML);
+  seconds++
+
+  if(seconds == 60){
+    minutes++;
+    seconds = 0;
+  }
+  minutes = checkTime(minutes);
+  seconds = checkTime(seconds);
+
+  document.getElementById('minutes').innerHTML = minutes;
+  document.getElementById('seconds').innerHTML = seconds;
+  var t = setTimeout(startTime, 1000);
+}
+
+/**
+ * Formats input unit of time with leading zero if less than 10
+ * @param {int} unit 
+ * Return String
+ */
+function checkTime(unit) {
+  if (unit < 10) {unit = "0" + unit};
+  return unit;
+}
+
+/**
  * Quick little test function
  */
 var sendGameData = function(){
@@ -24,6 +54,11 @@ var sendGameData = function(){
   );
 }
 
+/**
+ * Updates yellow/black player score based on received input (1 or 0)
+ * @param {int} yellowScored 
+ * @param {int} blackScored 
+ */
 function updateScore(yellowScored, blackScored){
 	if (yellowScored) {
 		yellow.score++
