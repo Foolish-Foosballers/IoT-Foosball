@@ -17,7 +17,11 @@
   <!-- Font awesome -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+  <!-- Custom Styles -->
   <link rel="stylesheet" type="text/css" href="../static/css/game.css">
+
+  <!-- Custom JS -->
+  <script src="/static/js/game.js"></script>
 
 </head>
 <body>
@@ -39,11 +43,41 @@
 
     <h4>Options</h4>
     <a type="button" class="btn btn-primary" href="/game">Restart</a>
-    <a type="button" class="btn btn-danger" href="/">End game</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm--modal">End game</button>
+
+    <!-- End Game Confirmation Modal -->
+    <div class="modal fade" id="confirm--modal" tabindex="-1" role="dialog" aria-labelledby="title--modal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form id="form--modal" method="post">
+            <div class="modal-header">
+              <h4 class="modal-title" id="title--modal">Please confirm the final score.</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="score-row">
+                <div class="score-col">
+                  <label for="yellow-score--modal"><i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i> <span id="yellow-name--modal">{{ result['yellow--name'] }}</span></label>
+                  <input name="yellow-score--modal" type="text" class="form-control">
+                </div>
+                <div class="score-col">
+                  <label for="black-score--modal"><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black-name--modal">{{ result['black--name'] }}</span></label>
+                  <input name="black-score--modal" type="text" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button id="save-rematch" type="button" class="btn btn-primary">Save & Rematch</button>
+              <button id="save-exit" type="button" class="btn btn-danger">Save & Exit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Custom JS -->
-  <script src="/static/js/game.js"></script>
   <script>
     setDefaultPlayerName();
     setDefaultPlayerScore();
