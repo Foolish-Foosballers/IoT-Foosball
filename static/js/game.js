@@ -60,12 +60,16 @@ var sendGameData = function(){
  * @param {int} blackScored 
  */
 function updateScore(yellowScored, blackScored){
+	console.log(yellowScored);
+	console.log(blackScored);
 	if (yellowScored) {
 		yellow.score++
 	}
 	else if (blackScored) {
 		black.score++
 	}
+	console.log(yellow.score);
+	console.log(blackScore);
 	setDefaultPlayerScore();
 }
 

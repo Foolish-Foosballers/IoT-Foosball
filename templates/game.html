@@ -94,6 +94,21 @@
     setDefaultPlayerScore();
     updateScore({{yellowScored}}, {{blackScored}});
     startTime();
+
+    $(document).ready(function() {
+      var refresh_id = setInterval(function() {
+        console.log('ready');
+        $.get(
+          "{{ url_for('threadStatus') }}",
+          function(data) {
+	    console.log(data);
+	    if (data.status == "finished") {
+              window.location.replace("{{ url_for('updateBlackScore') }}");
+            }
+          }
+        )}
+      , 1000);
+    });
   </script>
 </body>
 </html>
