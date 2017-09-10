@@ -44,7 +44,7 @@ function checkTime(unit) {
  * Quick little test function
  */
 var sendGameData = function(){
-	var gameData = JSON.stringify({"endTime": 56788, "bScore": 4, "yScore": 5, "bName": "daniel", "yName": "sara", "startTime": 53435, "_id": 3});
+  var gameData = JSON.stringify({"endTime": 56788, "bScore": 4, "yScore": 5, "bName": "daniel", "yName": "sara", "startTime": 53435, "_id": 3});
 	$.get(
 		url="endgame",
 		data={"gameData":gameData}, 
@@ -60,16 +60,12 @@ var sendGameData = function(){
  * @param {int} blackScored 
  */
 function updateScore(yellowScored, blackScored){
-	console.log(yellowScored);
-	console.log(blackScored);
 	if (yellowScored) {
-		yellow.score++
+    yellow.score++
 	}
 	else if (blackScored) {
-		black.score++
+    black.score++
 	}
-	console.log(yellow.score);
-	console.log(blackScore);
 	setDefaultPlayerScore();
 }
 

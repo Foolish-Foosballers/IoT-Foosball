@@ -97,13 +97,14 @@
 
     $(document).ready(function() {
       var refresh_id = setInterval(function() {
-        console.log('ready');
         $.get(
           "{{ url_for('threadStatus') }}",
           function(data) {
-	    console.log(data);
-	    if (data.status == "finished") {
-              window.location.replace("{{ url_for('updateBlackScore') }}");
+            if (data.yellowScored) {
+              updateScore(1,0);
+            }
+            else if (data.blackScored) {
+              updateScore(0,1);
             }
           }
         )}
