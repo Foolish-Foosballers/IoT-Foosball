@@ -19,12 +19,12 @@
     color: yellow;
 }
 
-.score-row {
+.modal-row {
     width: 100%;
     align-items: center;
 }
 
-.score-col {
+.modal-col {
     display: inline-block;
     margin-left: 5px;
     margin-right: 5px;

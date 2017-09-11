@@ -30,15 +30,24 @@ def bakePie():
         #     print "black goal"
         #     blackScored = True
         result = random.random()  
-        print result
+        # print result
         if result < 0.5:
-            print "black goal"
+            # print "black goal"
             blackScored = True
             time.sleep(1)
         else:
-            print "yelow goal!"
+            # print "yelow goal!"
             yellowScored = True
             time.sleep(1)
+
+# Returns a string representing the game data to be sent to JSON
+def formatGameData(index, formData):
+    gameData = {'_id': index,
+                'bName': formData['black-name--modal'],
+                'yName': formData['yellow-name--modal'],
+                'bScore': formData['black-score--modal'],
+                'yScore': formData['yellow-score--modal']}
+    return json.dumps(gameData)
             
 @app.route('/')
 def intro():
@@ -53,14 +62,17 @@ def quickGame():
     result = request.form
     return render_template('game.html', result=result, yellowScored=0, blackScored=0)
 
-@app.route('/endgame')
+@app.route('/endgame', methods=['POST'])
 def endGame():
-    gameData = request.args.get('gameData')
-    gameJson = json.loads(gameData)
-
+    # gameData = request.args.get('gameData')
     with open('games.json') as f: 
         data = json.load(f)
+    
+    newInd = len(data)
+    gameData = formatGameData(newInd, request.form)
+    gameJson = json.loads(gameData)
     data.append(gameJson)
+
     with open('games.json', 'w') as f:
         json.dump(data, f)
 
