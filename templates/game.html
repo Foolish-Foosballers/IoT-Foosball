@@ -33,12 +33,12 @@
       <div id="container--player-scoreboard">
         <div id="container--player-details">
           <p>
-            <i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i>
-            <span id="yellow--name">{{ result['yellow--name'] }}</span>
+            <i class="fa fa-circle" aria-hidden="true" id="icon--black"></i>
+            <span id="black--name">{{ result['black--name'] }}</span>
             <a href="./"><i class="fa fa-pencil" aria-hidden="true"></i></a>
           </p>
         </div>
-        <h1 id="yellow--score">0</h1>
+        <h1 id="black--score">0</h1>
       </div>
       <div id="timer">
         <span id="minutes">00</span>:<span id="seconds">00</span>
@@ -46,12 +46,12 @@
       <div id="container--player-scoreboard">
         <div id="container--player-details">
           <p>
-            <i class="fa fa-circle" aria-hidden="true" id="icon--black"></i>
-            <span id="black--name">{{ result['black--name'] }}</span>
+            <i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i>
+            <span id="yellow--name">{{ result['yellow--name'] }}</span>
             <a href="./"><i class="fa fa-pencil" aria-hidden="true"></i></a>
           </p>
         </div>
-        <h1 id="black--score">0</h1>
+        <h1 id="yellow--score">0</h1>
       </div>
     </div>
     <a type="button" class="btn btn-primary" href="/game">Restart</a>
@@ -71,21 +71,21 @@
             <div class="modal-body">
               <div class="modal-row">
                 <div class="modal-col">
+                    <label for="black-name--modal"><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black-name--modal">Black</span></label>
+                    <input name="black-name--modal" type="text" class="form-control" value="{{ result['black--name'] }}">
+                </div>                
+                <div class="modal-col">
                     <label for="yellow-name--modal"><i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i> <span id="yellow-name--modal">Yellow</span></label>
                     <input name="yellow-name--modal" type="text" class="form-control" value="{{ result['yellow--name'] }}">
-                </div>
-                <div class="modal-col">
-                  <label for="black-name--modal"><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black-name--modal">Black</span></label>
-                  <input name="black-name--modal" type="text" class="form-control" value="{{ result['black--name'] }}">
                 </div>
               </div>
               <div class="modal-row">
                 <div class="modal-col">
-                  <input name="yellow-score--modal" type="text" class="form-control">
+                    <input name="black-score--modal" type="text" class="form-control">
                 </div>
                 <div class="modal-col">
-                  <input name="black-score--modal" type="text" class="form-control">
-                </div>
+                  <input name="yellow-score--modal" type="text" class="form-control">
+                </div>                
               </div>
             </div>
             <div class="modal-footer">

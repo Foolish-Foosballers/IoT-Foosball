@@ -59,12 +59,17 @@ def quickGame():
     global finished
     thread = Thread(target=bakePie)
     thread.start()
-    result = request.form
+
+    # Handle empty name inputs
+    result = {
+        'black--name': request.form['black--name'] if request.form['black--name'] else "Player One",
+        'yellow--name': request.form['yellow--name'] if request.form['yellow--name'] else "Player Two"
+    }
+
     return render_template('game.html', result=result, yellowScored=0, blackScored=0)
 
 @app.route('/endgame', methods=['POST'])
 def endGame():
-    # gameData = request.args.get('gameData')
     with open('games.json') as f: 
         data = json.load(f)
     

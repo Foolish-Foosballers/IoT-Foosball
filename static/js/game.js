@@ -69,23 +69,6 @@ function updateScore(yellowScored, blackScored){
 	setDefaultPlayerScore();
 }
 
-function setDefaultPlayerName() {
-	var elYellowName = document.getElementById("yellow--name");
-	var elBlackName = document.getElementById("black--name");
-	var modalYellowName = document.getElementById("yellow-name--modal");
-	var modalBlackName = document.getElementById("black-name--modal");
-
-	if (elYellowName.innerText === "") {
-		elYellowName.innerText = yellow.name;
-		modalYellowName.innerText = yellow.name;
-	}
-
-	if (elBlackName.innerText === "") {
-		elBlackName.innerText = black.name;
-		modalBlackName.innerText = black.name;
-	}
-}
-
 function setDefaultPlayerScore() {
 	var elYellowScore = document.getElementById("yellow--score");
 	var elBlackScore = document.getElementById("black--score");
