@@ -21,47 +21,58 @@
   <link rel="stylesheet" type="text/css" href="../static/css/game.css">
 
   <!-- Custom JS -->
-  <script src="/static/js/game.js"></script>
-  <script src="/static/js/game-jquery.js"></script>
+  <script src="../static/js/game.js"></script>
+  <script src="../static/js/timer.js"></script>
 
 </head>
 <body>
   <div class="container container-fluid">
     <h1>Game</h1>
 
+    <!-- Scoreboard -->
     <div id="container--scoreboard">
+
+      <!-- Black side -->
       <div id="container--player-scoreboard">
         <div id="container--player-details">
           <p>
             <i class="fa fa-circle" aria-hidden="true" id="icon--black"></i>
-            <span id="black--name">{{ result['black--name'] }}</span>
+            <span id="black--name"></span>
             <a href="./"><i class="fa fa-pencil" aria-hidden="true"></i></a>
           </p>
         </div>
         <h1 id="black--score">0</h1>
       </div>
+
+      <!-- Timer -->
       <div id="timer">
-        <span id="minutes">00</span>:<span id="seconds">00</span>
+        <span id="minutes">00</span>:<span id="seconds">00</span> 
+        <span id="pause"><i class="fa fa-pause" aria-hidden="true"></i></span>
+        <span id="play"><i class="fa fa-play" aria-hidden="true"></i></span>
       </div>
+
+      <!-- Yellow side -->
       <div id="container--player-scoreboard">
         <div id="container--player-details">
           <p>
             <i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i>
-            <span id="yellow--name">{{ result['yellow--name'] }}</span>
+            <span id="yellow--name"></span>
             <a href="./"><i class="fa fa-pencil" aria-hidden="true"></i></a>
           </p>
         </div>
         <h1 id="yellow--score">0</h1>
       </div>
     </div>
-    <a type="button" class="btn btn-primary" href="/game">Restart</a>
+
+    <!-- Buttons -->
+    <button id="restart--game" type="button" class="btn btn-primary">Restart</button>
     <button id="end--game" type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm--modal">End game</button>
 
     <!-- End Game Confirmation Modal -->
     <div class="modal fade" id="confirm--modal" tabindex="-1" role="dialog" aria-labelledby="title--modal" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <form id="form--modal" action="/endgame" method="post">
+          <form id="form--modal" method="post">
             <div class="modal-header">
               <h4 class="modal-title" id="title--modal">Please confirm the final score.</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -72,11 +83,11 @@
               <div class="modal-row">
                 <div class="modal-col">
                     <label for="black-name--modal"><i class="fa fa-circle" aria-hidden="true" id="icon--black"></i> <span id="black-name--modal">Black</span></label>
-                    <input name="black-name--modal" type="text" class="form-control" value="{{ result['black--name'] }}">
+                    <input name="black-name--modal" type="text" class="form-control">
                 </div>                
                 <div class="modal-col">
                     <label for="yellow-name--modal"><i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i> <span id="yellow-name--modal">Yellow</span></label>
-                    <input name="yellow-name--modal" type="text" class="form-control" value="{{ result['yellow--name'] }}">
+                    <input name="yellow-name--modal" type="text" class="form-control">
                 </div>
               </div>
               <div class="modal-row">
@@ -89,8 +100,8 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button id="save-rematch" formaction="/game" type="button" class="btn btn-primary">Save & Rematch</button>
-              <button id="save-exit" type="submit" class="btn btn-danger">Save & Exit</button>
+              <button id="rematch--game" formaction="/game" type="button" class="btn btn-primary">Save & Rematch</button>
+              <button id="exit--game" formaction="/endgame" type="submit" class="btn btn-danger">Save & Exit</button>
             </div>
           </form>
         </div>
@@ -100,10 +111,14 @@
 
   <script>
     setDefaultPlayerScore();
-    updateScore({{yellowScored}}, {{blackScored}});
+    updateScore({{blackScored}}, {{yellowScored}});
+    updateName("{{ result['black--name'] }}", isBlack=true);
+    updateName("{{ result['yellow--name'] }}", isBlack=false);
     startTime();
 
-    $(document).ready(function() {
+    $(function() {
+
+      // Probe for sensor data
       var refresh_id = setInterval(function() {
         $.get(
           "{{ url_for('threadStatus') }}",
@@ -117,6 +132,7 @@
           }
         )}
       , 1000);
+
     });
   </script>
 </body>
