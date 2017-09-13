@@ -38,17 +38,24 @@
           <p>
             <i class="fa fa-circle" aria-hidden="true" id="icon--black"></i>
             <span id="black--name"></span>
-            <a href="./"><i class="fa fa-pencil" aria-hidden="true"></i></a>
           </p>
         </div>
         <h1 id="black--score">0</h1>
       </div>
 
       <!-- Timer -->
-      <div id="timer">
-        <span id="minutes">00</span>:<span id="seconds">00</span> 
-        <span id="pause"><i class="fa fa-pause" aria-hidden="true"></i></span>
-        <span id="play"><i class="fa fa-play" aria-hidden="true"></i></span>
+      <div id="menu">
+        <div id="timer">
+          <span id="minutes">00</span>:<span id="seconds">00</span> 
+        </div>
+        <div id="options">
+          <a id="replay"><i class="fa fa-repeat fa-3x" aria-hidden="true"></i></a>
+          <a id="pause"><i class="fa fa-pause fa-3x" aria-hidden="true"></i></a>
+          <a id="play"><i class="fa fa-play fa-3x" aria-hidden="true"></i></a>
+          <a id="exit"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
+        </div> 
+        <button id="button--edit-game" type="button" class="btn btn-primary">Edit</button>
+        <button id="button--save-game" type="button" class="btn btn-primary">Save</button>
       </div>
 
       <!-- Yellow side -->
@@ -57,7 +64,6 @@
           <p>
             <i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i>
             <span id="yellow--name"></span>
-            <a href="./"><i class="fa fa-pencil" aria-hidden="true"></i></a>
           </p>
         </div>
         <h1 id="yellow--score">0</h1>
@@ -110,7 +116,6 @@
   </div>
 
   <script>
-    setDefaultPlayerScore();
     updateScore({{blackScored}}, {{yellowScored}});
     updateName("{{ result['black--name'] }}", isBlack=true);
     updateName("{{ result['yellow--name'] }}", isBlack=false);

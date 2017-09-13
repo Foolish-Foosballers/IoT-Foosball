@@ -30,7 +30,7 @@ def bakePie():
         #     print "black goal"
         #     blackScored = True
         # result = random.random()  
-        result = 1
+        result = 0
         # print result
         if result < 0.5:
             # print "black goal"

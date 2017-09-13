@@ -14,27 +14,26 @@ $(document).ready(function() {
  * Runs the game timer and updates the time every 1 second.
  */
 function startTime() {
-  // gameTime.minutes = document.getElementById("minutes").innerText;
-  // gameTime.seconds = document.getElementById("seconds").innerText;
-  gameTime.seconds++
+  if(!gameIsPaused) {
+    // gameTime.minutes = document.getElementById("minutes").innerText;
+    // gameTime.seconds = document.getElementById("seconds").innerText;
+    gameTime.seconds++
 
-  if(gameTime.seconds == 60){
-    gameTime.minutes++;
-    gameTime.seconds = 0;
-	}
-  
-  // Format the time
-  gameTime.minutes = checkTime(gameTime.minutes);
-  gameTime.seconds = checkTime(gameTime.seconds);
+    if(gameTime.seconds == 60){
+      gameTime.minutes++;
+      gameTime.seconds = 0;
+    }
+    // Format the time
+    gameTime.minutes = checkTime(gameTime.minutes);
+    gameTime.seconds = checkTime(gameTime.seconds);
 
-  // Updated the view
-  document.getElementById('minutes').innerText = gameTime.minutes;
-  document.getElementById('seconds').innerText = gameTime.seconds;
-
-  // If the game is not paused, update the time
-	if(!gameIsPaused) {
-		var t = setTimeout(startTime, 1000);
-	}
+    // Updated the view
+    document.getElementById('minutes').innerText = gameTime.minutes;
+    document.getElementById('seconds').innerText = gameTime.seconds;
+    
+    // If the game is not paused, update the time
+    var t = setTimeout(startTime, 1000);
+  }
 }
 
 /**
@@ -58,7 +57,7 @@ function playGame() {
  * Return String
  */
 function checkTime(unit) {
-	var stringUnit = "" + unit;
-  if (unit < 10 && unit && stringUnit.length < 2) {unit = "0" + unit};
+  var stringUnit = "" + unit;
+  if (unit < 10 && stringUnit.length < 2) {unit = "0" + unit};
   return unit;
 }

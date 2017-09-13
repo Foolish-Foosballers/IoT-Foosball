@@ -38,3 +38,8 @@
 #black-name--modal {
     font-weight: normal;
 }
+
+#menu { 
+    display: flex;
+    flex-direction: column;
+}

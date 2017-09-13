@@ -29,13 +29,29 @@ var sendGameData = function(){
  * @param {int} blackScored 1 if black scored, else 0
  * @param {int} yellowScored 1 if yellow scored, else 0
  */
-function updateScore(blackScored, yellowScored){
+function updateScore(blackScored, yellowScored) {
 	if (blackScored) {
     	black.score++;
 	} else if (yellowScored) {
     	yellow.score++;
 	}
 	setScores();
+
+	if (yellow.score >= 5 && yellow.score - black.score >= 2) {
+		// $("#form--modal").modal('toggle');
+		console.log("yellow wins")
+	} else if (black.score >= 5 && black.score - yellow.score >= 2) {
+		// $("#form--modal").modal('toggle');
+		console.log("black wins")
+	}
+}
+
+/**
+ * Updates score elements on game page with current stored scores
+ */
+function setScores() {
+	$("#black--score").text(black.score);
+	$("#yellow--score").text(yellow.score);
 }
 
 /**
@@ -49,24 +65,7 @@ function updateName(newName, isBlack=true) {
 	} else {
 		yellow.name = (newName === "") ? "Player Two" : newName;		
 	}
-
-	console.log(yellow.score);
-	console.log(black.score);
-	console.log(yellow.score - black.score);
-	if(yellow.score >= 5 && yellow.score - black.score >= 2){
-		$("#form--modal").modal('toggle');
-		console.log("game over")
-	}
-	setDefaultPlayerScore();
 	setNames();
-}
-
-/**
- * Updates score elements on game page with current stored scores
- */
-function setScores() {
-	$("#black--score").text(black.score);
-	$("#yellow--score").text(yellow.score);
 }
 
 /**
