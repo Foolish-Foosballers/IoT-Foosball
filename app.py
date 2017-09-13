@@ -29,7 +29,8 @@ def bakePie():
         # elif GPIO.event_detected(blackPin, GPIO.RISING):
         #     print "black goal"
         #     blackScored = True
-        result = random.random()  
+        # result = random.random()  
+        result = 1
         # print result
         if result < 0.5:
             # print "black goal"

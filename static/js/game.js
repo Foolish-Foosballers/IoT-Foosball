@@ -66,6 +66,13 @@ function updateScore(yellowScored, blackScored){
 	else if (blackScored) {
     black.score++
 	}
+	console.log(yellow.score);
+	console.log(black.score);
+	console.log(yellow.score - black.score);
+	if(yellow.score >= 5 && yellow.score - black.score >= 2){
+		$("#form--modal").modal('toggle');
+		console.log("game over")
+	}
 	setDefaultPlayerScore();
 }
 
