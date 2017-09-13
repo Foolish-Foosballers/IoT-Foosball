@@ -1,44 +1,7 @@
 "use strict";
 
-var yellow = {
-  	name: "Player One",
-  	score: 0
-};
-
-var black = {
-	name: "Player Two",
-	score: 0
-};
-
-/**
- * Starts game timer and updates every second
- */
-function startTime() {
-  var minutes = parseInt(document.getElementById("minutes").innerHTML);
-  var seconds = parseInt(document.getElementById("seconds").innerHTML);
-  seconds++
-
-  if(seconds == 60){
-    minutes++;
-    seconds = 0;
-  }
-  minutes = checkTime(minutes);
-  seconds = checkTime(seconds);
-
-  document.getElementById('minutes').innerHTML = minutes;
-  document.getElementById('seconds').innerHTML = seconds;
-  var t = setTimeout(startTime, 1000);
-}
-
-/**
- * Formats input unit of time with leading zero if less than 10
- * @param {int} unit 
- * Return String
- */
-function checkTime(unit) {
-  if (unit < 10) {unit = "0" + unit};
-  return unit;
-}
+var yellow = { name: "Player One", score: 0};
+var black = { name: "Player Two", score: 0 };
 
 /**
  * Quick little test function
@@ -66,13 +29,4 @@ function updateScore(yellowScored, blackScored){
 	else if (blackScored) {
     black.score++
 	}
-	setDefaultPlayerScore();
-}
-
-function setDefaultPlayerScore() {
-	var elYellowScore = document.getElementById("yellow--score");
-	var elBlackScore = document.getElementById("black--score");
-
-	elYellowScore.innerText = yellow.score;
-	elBlackScore.innerText = black.score;
 }
