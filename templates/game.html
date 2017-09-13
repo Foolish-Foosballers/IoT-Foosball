@@ -21,15 +21,18 @@
   <link rel="stylesheet" type="text/css" href="../static/css/game.css">
 
   <!-- Custom JS -->
-  <script src="/static/js/game.js"></script>
-  <script src="/static/js/game-jquery.js"></script>
+  <script src="../static/js/game.js"></script>
+  <script src="../static/js/timer.js"></script>
 
 </head>
 <body>
   <div class="container container-fluid">
     <h1>Game</h1>
 
+    <!-- Scoreboard -->
     <div id="container--scoreboard">
+
+      <!-- Black side -->
       <div id="container--player-scoreboard">
         <div id="container--player-details">
           <p>
@@ -40,9 +43,15 @@
         </div>
         <h1 id="black--score">0</h1>
       </div>
+
+      <!-- Timer -->
       <div id="timer">
-        <span id="minutes">00</span>:<span id="seconds">00</span>
+        <span id="minutes">00</span>:<span id="seconds">00</span> 
+        <span id="pause"><i class="fa fa-pause" aria-hidden="true"></i></span>
+        <span id="play"><i class="fa fa-play" aria-hidden="true"></i></span>
       </div>
+
+      <!-- Yellow side -->
       <div id="container--player-scoreboard">
         <div id="container--player-details">
           <p>
@@ -54,6 +63,8 @@
         <h1 id="yellow--score">0</h1>
       </div>
     </div>
+
+    <!-- Buttons -->
     <button id="restart--game" type="button" class="btn btn-primary">Restart</button>
     <button id="end--game" type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm--modal">End game</button>
 

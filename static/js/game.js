@@ -11,35 +11,6 @@ var black = {
 };
 
 /**
- * Starts game timer and updates every second
- */
-function startTime() {
-  var minutes = parseInt(document.getElementById("minutes").innerHTML);
-  var seconds = parseInt(document.getElementById("seconds").innerHTML);
-  seconds++
-
-  if(seconds == 60){
-    minutes++;
-    seconds = 0;
-  }
-  minutes = checkTime(minutes);
-  seconds = checkTime(seconds);
-
-  document.getElementById('minutes').innerHTML = minutes;
-  document.getElementById('seconds').innerHTML = seconds;
-  var t = setTimeout(startTime, 1000);
-}
-
-/**
- * Formats input unit of time with leading zero if less than 10
- * @param {int} unit 
- */
-function checkTime(unit) {
-  if (unit < 10) {unit = "0" + unit};
-  return unit;
-}
-
-/**
  * Quick little test function 
  */
 var sendGameData = function(){
