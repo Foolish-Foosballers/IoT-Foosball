@@ -30,20 +30,26 @@ var sendGameData = function(){
  * @param {int} yellowScored 1 if yellow scored, else 0
  */
 function updateScore(blackScored, yellowScored) {
-	if (blackScored) {
-    	black.score++;
-	} else if (yellowScored) {
-    	yellow.score++;
+	if (!gameIsPaused) {
+		if (blackScored) {
+				black.score++;
+		} else if (yellowScored) {
+				yellow.score++;
+		}
+		setScores();
+		
+		if (yellow.score >= 5 && yellow.score - black.score >= 2) {
+			// $("#form--modal").modal('toggle');
+			console.log("yellow wins")
+			pauseGame()
+		} else if (black.score >= 5 && black.score - yellow.score >= 2) {
+			// $("#form--modal").modal('toggle');
+			console.log("black wins")
+			pauseGame()
+		}
 	}
-	setScores();
 
-	if (yellow.score >= 5 && yellow.score - black.score >= 2) {
-		// $("#form--modal").modal('toggle');
-		console.log("yellow wins")
-	} else if (black.score >= 5 && black.score - yellow.score >= 2) {
-		// $("#form--modal").modal('toggle');
-		console.log("black wins")
-	}
+
 }
 
 /**
