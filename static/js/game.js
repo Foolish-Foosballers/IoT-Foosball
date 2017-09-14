@@ -47,6 +47,17 @@ function updateScore(blackScored, yellowScored) {
 }
 
 /**
+ * Changes both player scores to match the input values
+ * @param {Number} blackScore New black player score
+ * @param {Number} yellowScore New yellow player score
+ */
+function editScore(blackScore, yellowScore) {
+	black.score = blackScore;
+	yellow.score = yellowScore;
+	setScores();
+}
+
+/**
  * Updates score elements on game page with current stored scores
  */
 function setScores() {
@@ -55,16 +66,13 @@ function setScores() {
 }
 
 /**
- * Updates yellow/black player name based on received input and calls setNames()
- * @param {string} newName The new name to store
- * @param {bool} isBlack True if updating black player's name, else false
+ * Changes both player names to match the input values or defaults
+ * @param {String} blackName New black player name
+ * @param {String} yellowName New yellow player name
  */
-function updateName(newName, isBlack=true) {
-	if (isBlack) {
-		black.name = (newName === "") ? "Player One" : newName;		
-	} else {
-		yellow.name = (newName === "") ? "Player Two" : newName;		
-	}
+function editNames(blackName="Player One", yellowName="Player Two") {
+	black.name = (blackName === "") ? "Player One" : blackName;		
+	yellow.name = (yellowName === "") ? "Player Two" : yellowName;		
 	setNames();
 }
 
@@ -74,24 +82,28 @@ function updateName(newName, isBlack=true) {
 function setNames() {
 	$("#black--name").text(black.name);
 	$("#yellow--name").text(yellow.name);
-	$("[name='black-name--modal']").val(black.name);
-	$("[name='yellow-name--modal']").val(yellow.name);
 }
 
 // jQuery event listeners
 $(function() {
 	
-	// Populate score inputs in end game modal
-	$("#end--game").click(function() {
+	// Populate inputs in edit modal
+	$("#button--edit-game").click(function() {
+		$("[name='black-name--modal']").val(black.name);
+		$("[name='yellow-name--modal']").val(yellow.name);	
 		$("[name='black-score--modal']").val(black.score);        
 		$("[name='yellow-score--modal']").val(yellow.score);
 	});
 
-	// Persist names if game is restarted
-	$("#restart--game").click(function() {
-		black.score = 0;
-		yellow.score = 0;
-		setScores();
+	// Reset scores if game is restarted
+	$("#button--restart-game").click(function() {
+		editScore(0, 0);
+	});
+
+	// 
+	$("#button--edit-confirm").click(function() {
+		editNames($("[name='black-name--modal']").val(), $("[name='yellow-name--modal']").val());
+		editScore($("[name='black-score--modal']").val(), $("[name='yellow-score--modal']").val());
 	});
 
 });

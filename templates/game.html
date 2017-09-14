@@ -43,18 +43,18 @@
         <h1 id="black--score">0</h1>
       </div>
 
-      <!-- Timer -->
+      <!-- Menu -->
       <div id="menu">
-        <div id="timer">
+        <div id="menu--timer">
           <span id="minutes">00</span>:<span id="seconds">00</span> 
         </div>
-        <div id="options">
-          <a id="replay"><i class="fa fa-repeat fa-3x" aria-hidden="true"></i></a>
+        <div id="menu--options">
+          <a id="button--restart-game"><i class="fa fa-repeat fa-3x" aria-hidden="true"></i></a>
           <a id="pause"><i class="fa fa-pause fa-3x" aria-hidden="true"></i></a>
           <a id="play"><i class="fa fa-play fa-3x" aria-hidden="true"></i></a>
           <a id="exit"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
         </div> 
-        <button id="button--edit-game" type="button" class="btn btn-primary">Edit</button>
+        <button id="button--edit-game" type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm--modal">Edit</button>
         <button id="button--save-game" type="button" class="btn btn-primary">Save</button>
       </div>
 
@@ -70,17 +70,13 @@
       </div>
     </div>
 
-    <!-- Buttons -->
-    <button id="restart--game" type="button" class="btn btn-primary">Restart</button>
-    <button id="end--game" type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm--modal">End game</button>
-
-    <!-- End Game Confirmation Modal -->
+    <!-- Edit Modal -->
     <div class="modal fade" id="confirm--modal" tabindex="-1" role="dialog" aria-labelledby="title--modal" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <form id="form--modal" method="post">
             <div class="modal-header">
-              <h4 class="modal-title" id="title--modal">Please confirm the final score.</h4>
+              <h4 class="modal-title" id="title--modal">Edit player names and scores below.</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -106,8 +102,8 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button id="rematch--game" formaction="/game" type="button" class="btn btn-primary">Save & Rematch</button>
-              <button id="exit--game" formaction="/endgame" type="submit" class="btn btn-danger">Save & Exit</button>
+              <button id="button--edit-cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button id="button--edit-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Confirm Changes</button>
             </div>
           </form>
         </div>
@@ -116,9 +112,8 @@
   </div>
 
   <script>
-    updateScore({{blackScored}}, {{yellowScored}});
-    updateName("{{ result['black--name'] }}", isBlack=true);
-    updateName("{{ result['yellow--name'] }}", isBlack=false);
+    updateScore({{ blackScored }}, {{ yellowScored }});
+    editNames("{{ result['black--name'] }}", "{{ result['yellow--name'] }}");
     startTime();
 
     $(function() {
