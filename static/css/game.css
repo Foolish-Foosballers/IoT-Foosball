@@ -19,16 +19,24 @@
     color: yellow;
 }
 
+.modal-title {
+    display: inline;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
 .modal-row {
-    width: 100%;
-    align-items: center;
+    display: flex;
+    margin-top: 3px;
 }
 
 .modal-col {
-    display: inline-block;
-    margin-left: 5px;
-    margin-right: 5px;
-    width: 47%;
+    flex-grow: 1;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 #yellow-name--modal {
