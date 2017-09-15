@@ -26,7 +26,6 @@
 </head>
 <body>
   <div class="container container-fluid">
-    <h1>Game</h1>
 
     <!-- Scoreboard -->
     <div id="container--scoreboard">
@@ -36,10 +35,10 @@
         <div id="container--player-details">
           <p>
             <i class="fa fa-circle" aria-hidden="true" id="icon--black"></i>
-            <span id="black--name"></span>
+            <span id="black--name" class="name"></span>
           </p>
         </div>
-        <h1 id="black--score">0</h1>
+        <p id="black--score" class="score">0</p>
       </div>
 
       <!-- Menu -->
@@ -52,8 +51,8 @@
           <a id="pause-play" class="game-option"><i class="fa fa-pause fa-3x" aria-hidden="true"></i></a>
           <a id="exit" class="game-option"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
         </div> 
-        <button id="button--edit-game" type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm--modal">Edit</button>
-        <button id="button--save-game" type="button" class="btn btn-primary">Save</button>
+        <button id="button--edit-game" type="button" class="menu-button btn btn-primary" data-toggle="modal" data-target="#confirm--modal">Edit</button>
+        <button id="button--save-game" type="button" class="menu-button btn btn-primary">Save</button>
       </div>
 
       <!-- Yellow side -->
@@ -61,10 +60,10 @@
         <div id="container--player-details">
           <p>
             <i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i>
-            <span id="yellow--name"></span>
+            <span id="yellow--name" class="name"></span>
           </p>
         </div>
-        <h1 id="yellow--score">0</h1>
+        <p id="yellow--score" class="score">0</p>
       </div>
     </div>
 
