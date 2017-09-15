@@ -3,18 +3,20 @@
 // Game level variables
 var gameTime = { minutes: 0, seconds: 0 };
 var gameIsPaused = false;
+var pausePlayEl;
+var gameIsOver = false;
 
 // Add the event listeners when the dom is ready
 $(document).ready(function() {
-	document.getElementById("pause").addEventListener("click", pauseGame);
-	document.getElementById("play").addEventListener("click", playGame);
+  pausePlayEl = document.getElementById("pause-play")
+	pausePlayEl.addEventListener("click", updateGameState);
 });
 
 /**
  * Runs the game timer and updates the time every 1 second.
  */
 function startTime() {
-  if(!gameIsPaused) {
+  if(!gameIsPaused && !gameIsOver) {
     // gameTime.minutes = document.getElementById("minutes").innerText;
     // gameTime.seconds = document.getElementById("seconds").innerText;
     gameTime.seconds++
@@ -36,19 +38,25 @@ function startTime() {
   }
 }
 
-/**
- * Pause the game timer
- */
-function pauseGame() {
-	gameIsPaused = true;
+function updateGameState() {
+  if (gameIsPaused && !gameIsOver) {
+    gameIsPaused = false;
+    pausePlayEl.innerHTML = '<i class="fa fa-pause fa-3x" aria-hidden="true"></i>';
+    startTime();
+  } else if (!gameIsPaused && !gameIsOver) {
+    gameIsPaused = true;
+    pausePlayEl.innerHTML = '<i class="fa fa-play fa-3x" aria-hidden="true"></i>';
+  }
 }
 
-/**
- * Resume the game timer with its current time
- */
-function playGame() {
-	gameIsPaused = false;
-	startTime();
+function endGame() {
+  gameIsOver = true;
+  pausePlayEl.innerHTML = '';
+}
+
+function restartGame() {
+  gameIsOver = false;
+  pausePlayEl.innerHTML = '<i class="fa fa-pause fa-3x" aria-hidden="true"></i>';
 }
 
 /**

@@ -21,9 +21,7 @@
   <link rel="stylesheet" type="text/css" href="../static/css/game.css">
 
   <!-- Custom JS -->
-  <script src="../static/js/timer.js"></script>
   <script src="../static/js/game.js"></script>
-
 
 </head>
 <body>
@@ -50,10 +48,9 @@
           <span id="minutes">00</span>:<span id="seconds">00</span> 
         </div>
         <div id="menu--options">
-          <a id="button--restart-game"><i class="fa fa-repeat fa-3x" aria-hidden="true"></i></a>
-          <a id="pause"><i class="fa fa-pause fa-3x" aria-hidden="true"></i></a>
-          <a id="play"><i class="fa fa-play fa-3x" aria-hidden="true"></i></a>
-          <a id="exit"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
+          <a id="button--restart-game" class="game-option"><i class="fa fa-repeat fa-3x" aria-hidden="true"></i></a>
+          <a id="pause-play" class="game-option"><i class="fa fa-pause fa-3x" aria-hidden="true"></i></a>
+          <a id="exit" class="game-option"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
         </div> 
         <button id="button--edit-game" type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm--modal">Edit</button>
         <button id="button--save-game" type="button" class="btn btn-primary">Save</button>
