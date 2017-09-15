@@ -15,6 +15,7 @@ $(function() {
 
 	// Populate inputs in edit modal
 	$("#button--edit-game").click(function() {
+		updateGameState();
 		$("[name='black-name--modal']").val(black.name);
 		$("[name='yellow-name--modal']").val(yellow.name);	
 		$("[name='black-score--modal']").val(black.score);        
