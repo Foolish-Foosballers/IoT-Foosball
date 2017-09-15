@@ -15,7 +15,11 @@ $(function() {
 
 	// Populate inputs in edit modal
 	$("#button--edit-game").click(function() {
-		updateGameState();
+		// Pause the game
+		gameIsPaused = true;
+		$('#pause-play').html('<i class="fa fa-play fa-3x" aria-hidden="true"></i>');
+		
+		// Place the content in the modal
 		$("[name='black-name--modal']").val(black.name);
 		$("[name='yellow-name--modal']").val(yellow.name);	
 		$("[name='black-score--modal']").val(black.score);        
