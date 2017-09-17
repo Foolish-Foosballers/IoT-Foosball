@@ -21,15 +21,12 @@
   <link rel="stylesheet" type="text/css" href="../static/css/game.css">
 
   <!-- Custom JS -->
-  <script src="../static/js/timer.js"></script>
   <script src="../static/js/game.js"></script>
   <script src="../static/js/modernizr.custom.80028.js"></script>
-
 
 </head>
 <body>
   <div class="container container-fluid">
-    <h1>Game</h1>
 
     <!-- Scoreboard -->
     <div id="container--scoreboard">
@@ -39,10 +36,10 @@
         <div id="container--player-details">
           <p>
             <i class="fa fa-circle" aria-hidden="true" id="icon--black"></i>
-            <span id="black--name"></span>
+            <span id="black--name" class="name"></span>
           </p>
         </div>
-        <h1 id="black--score">0</h1>
+        <p id="black--score" class="score">0</p>
       </div>
 
       <!-- Menu -->
@@ -51,13 +48,12 @@
           <span id="minutes">00</span>:<span id="seconds">00</span> 
         </div>
         <div id="menu--options">
-          <a id="button--restart-game"><i class="fa fa-repeat fa-3x" aria-hidden="true"></i></a>
-          <a id="pause"><i class="fa fa-pause fa-3x" aria-hidden="true"></i></a>
-          <a id="play"><i class="fa fa-play fa-3x" aria-hidden="true"></i></a>
-          <a id="exit"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
+          <a id="button--restart-game" class="game-option"><i class="fa fa-repeat fa-3x" aria-hidden="true"></i></a>
+          <a id="pause-play" class="game-option"><i class="fa fa-pause fa-3x" aria-hidden="true"></i></a>
+          <a id="exit" class="game-option"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
         </div> 
-        <button id="button--edit-game" type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirm--modal">Edit</button>
-        <button id="button--save-game" type="button" class="btn btn-primary">Save</button>
+        <button id="button--edit-game" type="button" class="menu-button btn btn-primary" data-toggle="modal" data-target="#confirm--modal">Edit</button>
+        <button id="button--save-game" type="button" class="menu-button btn btn-primary">Save</button>
       </div>
 
       <!-- Yellow side -->
@@ -65,10 +61,10 @@
         <div id="container--player-details">
           <p>
             <i class="fa fa-circle" aria-hidden="true" id="icon--yellow"></i>
-            <span id="yellow--name"></span>
+            <span id="yellow--name" class="name"></span>
           </p>
         </div>
-        <h1 id="yellow--score">0</h1>
+        <p id="yellow--score" class="score">0</p>
       </div>
     </div>
 

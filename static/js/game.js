@@ -1,14 +1,44 @@
 "use strict";
 
-var yellow = {
-  	name: "Player One",
-  	score: 0
-};
+var yellow = { name: "Player One", score: 0 };
+var black = { name: "Player Two", score: 0 };
+var gameTime = { minutes: 0, seconds: 0 };
+var gameIsPaused = false;
+var gameIsOver = false;
 
-var black = {
-	name: "Player Two",
-	score: 0
-};
+/**
+ * Document ready lifecycle method
+ */
+$(function() {
+	// bind the updateGameState function to the pause / play button
+	$('#pause-play').on('click', updateGameState);
+
+	// Populate inputs in edit modal
+	$("#button--edit-game").click(function() {
+		// Pause the game
+		gameIsPaused = true;
+		$('#pause-play').html('<i class="fa fa-play fa-3x" aria-hidden="true"></i>');
+		
+		// Place the content in the modal
+		$("[name='black-name--modal']").val(black.name);
+		$("[name='yellow-name--modal']").val(yellow.name);	
+		$("[name='black-score--modal']").val(black.score);        
+		$("[name='yellow-score--modal']").val(yellow.score);
+	});
+
+	// Reset scores if game is restarted
+	$("#button--restart-game").click(function() {
+		editScore(0, 0);
+		restartGame();
+	});
+
+	// 
+	$("#button--edit-confirm").click(function() {
+		editNames($("[name='black-name--modal']").val(), $("[name='yellow-name--modal']").val());
+		editScore($("[name='black-score--modal']").val(), $("[name='yellow-score--modal']").val());
+	});
+
+});
 
 /**
  * Quick little test function 
@@ -30,7 +60,7 @@ var sendGameData = function(){
  * @param {int} yellowScored 1 if yellow scored, else 0
  */
 function updateScore(blackScored, yellowScored) {
-	if (!gameIsPaused) {
+	if (!gameIsPaused && !gameIsOver) {
 		if (blackScored) {
 				black.score++;
 		} else if (yellowScored) {
@@ -39,13 +69,11 @@ function updateScore(blackScored, yellowScored) {
 		setScores();
 		
 		if (yellow.score >= 5 && yellow.score - black.score >= 2) {
-			// $("#form--modal").modal('toggle');
-			console.log("yellow wins")
-			pauseGame()
+			console.log("yellow wins");
+			endGame();
 		} else if (black.score >= 5 && black.score - yellow.score >= 2) {
-			// $("#form--modal").modal('toggle');
-			console.log("black wins")
-			pauseGame()
+			console.log("black wins");
+			endGame();
 		}
 	}
 }
@@ -105,23 +133,8 @@ $(function() {
 		$("[name='yellow-score--modal']").val(yellow.score);
 	});
 
-	// Reset scores if game is restarted
-	$("#button--restart-game").click(function() {
-		editScore(0, 0);
-	});
-
-	// 
-	$("#button--edit-confirm").click(function() {
-		editNames($("[name='black-name--modal']").val(), $("[name='yellow-name--modal']").val());
-		editScore($("[name='black-score--modal']").val(), $("[name='yellow-score--modal']").val());
-	});
-
-	// Save game to json file
+	// Save game to json file and alert user game saved
 	$("#button--save-game").click(function() {
-		// var popUp = $("#alert--game-saved");
-		// if (popUp.classList.contains("game-saved")) {
-		// 	popUp.classList.remove("game-saved");
-		// }
 		var gameData = JSON.stringify({"bScore": black.score, "yScore": yellow.score, "bName": black.name, "yName": yellow.name});
 		$.get("endgame",{"gameData":gameData}, 
 			function(data) {
@@ -135,5 +148,84 @@ $(function() {
 			}
 		);
 	});
-
+	
 });
+
+/**
+ * Runs the game timer and updates the time every 1 second.
+ */
+function startTime() {
+  if(!gameIsPaused && !gameIsOver) {
+    gameTime.seconds++
+
+    if(gameTime.seconds == 60){
+      gameTime.minutes++;
+      gameTime.seconds = 0;
+    }
+    // Format the time
+    gameTime.minutes = formatTime(gameTime.minutes);
+    gameTime.seconds = formatTime(gameTime.seconds);
+
+		// Updated the view
+		$('#minutes').text(gameTime.minutes);
+		$('#seconds').text(gameTime.seconds);
+    
+    // If the game is not paused, update the time
+    var t = setTimeout(startTime, 1000);
+  }
+}
+
+/**
+ * Update the pause play button depending on the game state
+ */
+function updateGameState() {
+  if (gameIsPaused && !gameIsOver) {
+		gameIsPaused = false;
+    $('#pause-play').html('<i class="fa fa-pause fa-3x" aria-hidden="true"></i>');
+    startTime();
+  } else if (!gameIsPaused && !gameIsOver) {
+		gameIsPaused = true;
+    $('#pause-play').html('<i class="fa fa-play fa-3x" aria-hidden="true"></i>');
+  }
+}
+
+/**
+ * End the foosball game
+ */
+function endGame() {
+  gameIsOver = true;
+	$("#pause-play").html('');
+}
+
+/**
+ * Restart a foosball game
+ */
+function restartGame() {
+	$("#pause-play").html('<i class="fa fa-pause fa-3x" aria-hidden="true"></i>');
+
+	// Update the game time
+	gameTime.minutes = formatTime(0);
+	gameTime.seconds = formatTime(0);
+
+	// Updated the view
+	$('#minutes').text(gameTime.minutes);
+	$('#seconds').text(gameTime.seconds);
+
+	if (gameIsPaused || gameIsOver) {
+		gameIsPaused = false;
+		gameIsOver = false;
+		startTime();
+	}
+}
+
+/**
+ * Formats input unit of time with leading zero if less than 10
+ * @param {int} unit 
+ * Return String
+ */
+function formatTime(unit) {
+  var stringUnit = "" + unit;
+  if (unit < 10 && stringUnit.length < 2) {unit = "0" + unit};
+  return unit;
+}
+

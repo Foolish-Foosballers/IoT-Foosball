@@ -1,3 +1,7 @@
+body {
+    margin-top: 75px;
+}
+
 #container--scoreboard {
     display: flex;
     align-items: center;
@@ -17,6 +21,14 @@
 
 #icon--yellow {
     color: yellow;
+}
+
+.score {
+    font-size: 150px;
+}
+
+.name {
+    font-size: 30px;
 }
 
 .modal-title {
@@ -89,4 +101,16 @@
 
 .hidden {
     display: none;
+}
+
+.game-option:hover {
+    cursor: pointer; cursor: hand;
+}
+
+#menu--timer {
+    font-size: 50px;
+}
+
+.menu-button {
+    margin-top: 5px;
 }
