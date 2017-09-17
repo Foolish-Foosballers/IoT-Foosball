@@ -23,6 +23,7 @@
   <!-- Custom JS -->
   <script src="../static/js/timer.js"></script>
   <script src="../static/js/game.js"></script>
+  <script src="../static/js/modernizr.custom.80028.js"></script>
 
 
 </head>
@@ -112,6 +113,10 @@
     </div>
   </div>
 
+  <div id="alert--game-saved" class="hidden">
+      Game Saved <a id="close">[close]</a>
+  </div>
+
   <script>
     updateScore({{ blackScored }}, {{ yellowScored }});
     editNames("{{ result['black--name'] }}", "{{ result['yellow--name'] }}");
@@ -136,5 +141,7 @@
 
     });
   </script>
+
+
 </body>
 </html>

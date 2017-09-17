@@ -14,7 +14,7 @@ var black = {
  * Quick little test function 
  */
 var sendGameData = function(){
-  var gameData = JSON.stringify({"endTime": 56788, "bScore": 4, "yScore": 5, "bName": "daniel", "yName": "sara", "startTime": 53435, "_id": 3});
+  // var gameData = JSON.stringify({"endTime": 56788, "bScore": 4, "yScore": 5, "bName": "daniel", "yName": "sara", "startTime": 53435, "_id": 3});
 	$.get(
 		url="endgame",
 		data={"gameData":gameData}, 
@@ -48,8 +48,6 @@ function updateScore(blackScored, yellowScored) {
 			pauseGame()
 		}
 	}
-
-
 }
 
 /**
@@ -93,6 +91,12 @@ function setNames() {
 // jQuery event listeners
 $(function() {
 	
+	var close = document.getElementById("close");
+	close.addEventListener('click', function() {
+		var note = document.getElementById("note");
+		note.style.display = 'none';
+	}, false);
+
 	// Populate inputs in edit modal
 	$("#button--edit-game").click(function() {
 		$("[name='black-name--modal']").val(black.name);
@@ -110,6 +114,26 @@ $(function() {
 	$("#button--edit-confirm").click(function() {
 		editNames($("[name='black-name--modal']").val(), $("[name='yellow-name--modal']").val());
 		editScore($("[name='black-score--modal']").val(), $("[name='yellow-score--modal']").val());
+	});
+
+	// Save game to json file
+	$("#button--save-game").click(function() {
+		// var popUp = $("#alert--game-saved");
+		// if (popUp.classList.contains("game-saved")) {
+		// 	popUp.classList.remove("game-saved");
+		// }
+		var gameData = JSON.stringify({"bScore": black.score, "yScore": yellow.score, "bName": black.name, "yName": yellow.name});
+		$.get("endgame",{"gameData":gameData}, 
+			function(data) {
+				var popUp = document.getElementById('alert--game-saved');
+				popUp.classList.add("game-saved");
+				popUp.classList.remove("hidden");
+				popUp.addEventListener("webkitAnimationEnd", function() {
+					popUp.classList.remove('game-saved');
+					popUp.classList.add("hidden");
+				});
+			}
+		);
 	});
 
 });
