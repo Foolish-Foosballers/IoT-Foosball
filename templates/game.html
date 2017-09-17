@@ -50,10 +50,12 @@
         <div id="menu--options">
           <a id="button--restart-game" class="game-option"><i class="fa fa-repeat fa-3x" aria-hidden="true"></i></a>
           <a id="pause-play" class="game-option"><i class="fa fa-pause fa-3x" aria-hidden="true"></i></a>
-          <a id="exit" class="game-option"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
+          <form id="quit--form" action="/" class="game-option">
+            <a id="button--quit-game" class="game-option"><i class="fa fa-sign-out fa-3x" aria-hidden="true"></i></a>
+          </form>
         </div> 
         <button id="button--edit-game" type="button" class="menu-button btn btn-primary" data-toggle="modal" data-target="#confirm--modal">Edit</button>
-        <button id="button--save-game" type="button" class="menu-button btn btn-primary">Save</button>
+        <button id="button--save-game" type="button" class="menu-button btn btn-primary" disabled>Save</button>
       </div>
 
       <!-- Yellow side -->
@@ -109,8 +111,30 @@
     </div>
   </div>
 
+  <!-- Quit Modal -->
+  <div class="modal fade" id="quit--modal" tabindex="-1" role="dialog" aria-labelledby="title--modal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="title--modal">Warning!</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>If you continue, your game will not be saved.</p>
+          </div>
+          <div class="modal-footer">
+            <button id="button--edit-cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button id="button--edit-confirm" type="button" class="btn btn-danger">Quit Anyway</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="alert--game-saved" class="hidden">
-      Game Saved <a id="close">[close]</a>
+      Game Saved
   </div>
 
   <script>

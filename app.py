@@ -51,8 +51,9 @@ def formatGameData(index, gameData):
                 'yScore': gameData['yScore']}
     return json.dumps(gameData)
             
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def intro():
+    print "hello"
     return render_template('index.html')
 
 @app.route('/game', methods=['POST'])

@@ -5,11 +5,13 @@ var black = { name: "Player Two", score: 0 };
 var gameTime = { minutes: 0, seconds: 0 };
 var gameIsPaused = false;
 var gameIsOver = false;
+var gameIsSaved = false;
 
 /**
  * Document ready lifecycle method
  */
 $(function() {
+
 	// bind the updateGameState function to the pause / play button
 	$('#pause-play').on('click', updateGameState);
 
@@ -29,30 +31,45 @@ $(function() {
 	// Reset scores if game is restarted
 	$("#button--restart-game").click(function() {
 		editScore(0, 0);
+		gameIsSaved = false;
+		$("#button--save-game").prop("disabled", true);		
 		restartGame();
 	});
 
-	// 
+	// Update model and view with edited values
 	$("#button--edit-confirm").click(function() {
 		editNames($("[name='black-name--modal']").val(), $("[name='yellow-name--modal']").val());
 		editScore($("[name='black-score--modal']").val(), $("[name='yellow-score--modal']").val());
 	});
 
-});
+	// Save game to json file and alert user game saved
+	$("#button--save-game").click(function() {
+		var gameData = JSON.stringify({"bScore": black.score, "yScore": yellow.score, "bName": black.name, "yName": yellow.name});
+		$.get("endgame",{"gameData":gameData}, 
+			function(data) {
+				gameIsSaved = true;
+				var popUp = document.getElementById('alert--game-saved');
+				popUp.classList.add("game-saved");
+				popUp.classList.remove("hidden");
+				$("#button--save-game").prop("disabled", true);
+				popUp.addEventListener("webkitAnimationEnd", function() {
+					popUp.classList.remove('game-saved');
+					popUp.classList.add("hidden");
+				});
+			}
+		);
+	});
 
-/**
- * Quick little test function 
- */
-var sendGameData = function(){
-  // var gameData = JSON.stringify({"endTime": 56788, "bScore": 4, "yScore": 5, "bName": "daniel", "yName": "sara", "startTime": 53435, "_id": 3});
-	$.get(
-		url="endgame",
-		data={"gameData":gameData}, 
-		success=function(data) {
-			alert('page content: ' + data);
+	// Pull up quit modal if trying to quit without saving
+	$("#button--quit-game").click(function() {
+		if (!gameIsSaved) {
+			console.log("warning");
+			$('#quit--modal').modal('show');
+		} else {
+			$("#quit--form").submit();
 		}
-  );
-}
+	});
+});
 
 /**
  * Updates yellow/black player score based on received input (1 or 0)
@@ -116,41 +133,6 @@ function setNames() {
 	$("#yellow--name").text(yellow.name);
 }
 
-// jQuery event listeners
-$(function() {
-	
-	var close = document.getElementById("close");
-	close.addEventListener('click', function() {
-		var note = document.getElementById("note");
-		note.style.display = 'none';
-	}, false);
-
-	// Populate inputs in edit modal
-	$("#button--edit-game").click(function() {
-		$("[name='black-name--modal']").val(black.name);
-		$("[name='yellow-name--modal']").val(yellow.name);	
-		$("[name='black-score--modal']").val(black.score);        
-		$("[name='yellow-score--modal']").val(yellow.score);
-	});
-
-	// Save game to json file and alert user game saved
-	$("#button--save-game").click(function() {
-		var gameData = JSON.stringify({"bScore": black.score, "yScore": yellow.score, "bName": black.name, "yName": yellow.name});
-		$.get("endgame",{"gameData":gameData}, 
-			function(data) {
-				var popUp = document.getElementById('alert--game-saved');
-				popUp.classList.add("game-saved");
-				popUp.classList.remove("hidden");
-				popUp.addEventListener("webkitAnimationEnd", function() {
-					popUp.classList.remove('game-saved');
-					popUp.classList.add("hidden");
-				});
-			}
-		);
-	});
-	
-});
-
 /**
  * Runs the game timer and updates the time every 1 second.
  */
@@ -193,7 +175,8 @@ function updateGameState() {
  * End the foosball game
  */
 function endGame() {
-  gameIsOver = true;
+	gameIsOver = true;
+	$("#button--save-game").prop("disabled", false);
 	$("#pause-play").html('');
 }
 

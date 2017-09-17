@@ -64,13 +64,21 @@ body {
     flex-direction: column;
 }
 
+#menu--options {
+    display: flex;
+}
+
+.game-option {
+    flex-grow: 1;
+}
+
 #alert--game-saved {
     position: absolute;
     z-index: 101;
     top: 0;
     left: 0;
     right: 0;
-    background: #fde073;
+    background: rgb(64, 211, 47);
     text-align: center;
     line-height: 2.5;
     overflow: hidden; 
@@ -93,10 +101,6 @@ body {
     -webkit-animation: slideDown 2.5s 1.0s 1 ease forwards;
     -moz-transform:    translateY(-50px);
     -moz-animation:    slideDown 2.5s 1.0s 1 ease forwards;
-}
-
-.cssanimations.csstransforms #close {
-    display: none;
 }
 
 .hidden {
