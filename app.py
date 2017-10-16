@@ -6,7 +6,7 @@ import os, random
         
 app = Flask(__name__)
 
-blackPin, yellowPin = 5, 6
+blackPin, yellowPin = 6, 5
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(blackPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setmode(GPIO.BCM)
