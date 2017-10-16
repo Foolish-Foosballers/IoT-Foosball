@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time, json, jinja2
 from threading import Thread
 import os, random
@@ -11,35 +11,25 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(blackPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(yellowPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.add_event_detect(blackPin, GPIO.RISING, bouncetime=1000)
+GPIO.add_event_detect(yellowPin, GPIO.RISING, bouncetime=1000)
 blackScored = False
 yellowScored = False
 thread = Thread()
 
 def bakePie():
-    GPIO.add_event_detect(blackPin, GPIO.RISING)
-    GPIO.add_event_detect(yellowPin, GPIO.RISING)
     while True:
         global yellowScored
         global blackScored
         yellowScored = False
         blackScored = False
         if GPIO.event_detected(yellowPin):
-            print "yelow goal!"
+            print "yellow goal!"
             yellowScored = True
-        elif GPIO.event_detected(blackPin, GPIO.RISING):
+        elif GPIO.event_detected(blackPin):
             print "black goal"
             blackScored = True
-        # # result = random.random()  
-        # result = 1
-        # # print result
-        # if result < 0.5:
-        #     # print "black goal"
-        #     blackScored = True
-        #     time.sleep(1)
-        # else:
-        #     # print "yelow goal!"
-        #     yellowScored = True
-        #     time.sleep(1)
+        time.sleep(1)
 
 # Returns a string representing the game data to be sent to JSON
 def formatGameData(index, gameData):
@@ -79,18 +69,6 @@ def endGame():
         json.dump(data, f)
 
     return render_template('game.html', result=None, yellowScored=int(gameJson['yScore']), blackScored=int(gameJson['bScore']))
-
-@app.route('/blackScore')
-def updateBlackScore():
-    yellow = int(request.args.get('yellow'))
-    black = int(request.args.get('black')) + 1
-    return render_template('game.html', result=None, yellowScored=yellow, blackScored=black)
-
-@app.route('/yellowScore')
-def updateYellowScore():
-    yellow = int(request.args.get('yellow')) + 1
-    black = int(request.args.get('black'))
-    return render_template('game.html', result=None, yellowScored=yellow, blackScored=black)
 
 @app.route('/status')
 def threadStatus():
