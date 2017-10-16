@@ -152,10 +152,10 @@
           "{{ url_for('threadStatus') }}",
           function(data) {
             if (data.yellowScored) {
-              updateScore(1,0);
+              updateScore(0, 1);
             }
             else if (data.blackScored) {
-              updateScore(0,1);
+              updateScore(1, 0);
             }
           }
         )}
